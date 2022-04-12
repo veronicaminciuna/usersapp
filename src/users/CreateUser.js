@@ -6,11 +6,25 @@ class CreateUser extends Component {
         age:"",
     }
     state = this.initialState;
+
+    formUser=(event)=> {
+        const {name,value} = event.target;
+        this.setState({
+            [name]:value,
+        })
+        console.log(this.state)
+    }
+
+    addUser=()=> {
+        this.props.addUser(this.state);
+        this.setState(this.initialState);//reset state to the initial state
+    }
+
     render() {
         const {name,age} = this.state;
         return(
             <form>
-                <div className='container'>
+                <h1>Add User</h1>
                 <div className='form-group'>
                 <label htmlFor='name'>Name</label>
                 <input className='form-control'
@@ -18,6 +32,7 @@ class CreateUser extends Component {
                 name="name"
                 id='name'
                 value={name}
+                onChange={this.formUser}
                 />
                 </div>
                 <div className='form-group'>
@@ -27,9 +42,10 @@ class CreateUser extends Component {
                 name="age"
                 id='age'
                 value={age}
+                onChange={this.formUser}
                 />
                 </div>
-                </div>
+                <input className='btn btn-primary' type="button" value="Submit" onClick={this.addUser}/>
             </form>
         )
     }

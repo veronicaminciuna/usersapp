@@ -19,6 +19,10 @@ class App extends React.Component {
     ]
   }
 
+  addUser=(user)=> {
+    this.setState({userData:[...this.state.userData, user]});
+  }
+
   removeUser=(index)=> {
     const {userData} = this.state;
     const data = userData.filter((value, i)=> {
@@ -29,9 +33,9 @@ class App extends React.Component {
   render() {
     const {userData} = this.state;
     return (
-      <div>
+      <div className='container'>
       <UsersContainer users={userData} removeUser={this.removeUser}/>
-       <CreateUser/>
+       <CreateUser addUser={this.addUser}/>
        </div>
       )
 }
